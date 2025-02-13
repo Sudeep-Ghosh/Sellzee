@@ -1,0 +1,5 @@
+package com.sellzee.authService.controller;
+
+public class UserController {
+
+}

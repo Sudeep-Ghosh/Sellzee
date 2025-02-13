@@ -1,0 +1,121 @@
+package com.sellzee.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sellzee.clients.EmailClient;
+import com.sellzee.dto.UserDTO;
+import com.sellzee.exception.UserInvalidException;
+import com.sellzee.model.Email;
+import com.sellzee.model.User;
+import com.sellzee.repository.UserRepository;
+
+@Service
+public class UserServiceImpl implements UserService {
+	
+	@Autowired
+	private UserRepository userRespository;
+	
+	@Autowired
+	private EmailClient emailClient;
+
+	@Override
+	public User registerUser(User user) throws UserInvalidException {
+		// TODO Auto-generated method stub
+		Optional<User> optUser = Optional.ofNullable(userRespository.findByUsername(user.getUsername()));
+		if(optUser.isPresent()) {
+			throw new UserInvalidException("Username already exist");
+		}
+		Email mail = new Email();
+		mail.setTo(user.getEmail());
+		mail.setSubject("Welcome to Sellzee!! Where Cars Find Their True Value.");
+		mail.setText("Hello "+user.getName()+"\n\n"
+				+"Welcome to the Sellzee Family. You have successfully registered yourself, and taken the first step to maximizing the value of your vehicle."
+				+"\n\nAt Sellzee, we understand the passion & love you pour into your cars." 
+				+"That's why we're committed to ensuring that your vehicle finds its best market."
+				+"\n\nTo get started:\r\n"
+				+ "\r\n"
+				+ "->Log in to your account as a Seller or dealer.\r\n"
+				+ "->Complete any remaining profile details.\r\n"
+				+ "->List your vehicle or just make your way to buy it and watch as opportunities come knocking!"
+				+"\n\nRemember, every vehicle has its value, and at Sellzee, we're here to ensure you find it. Thank you for trusting us with your business. Together, let's revolutionize the used market."
+				+"\n\nWarm Regards,\nTeam Sellzee");
+		return userRespository.save(user);
+	}
+
+	@Override
+	public User updateUser(UserDTO user, String userId) throws UserInvalidException {
+		// TODO Auto-generated method stub
+		Optional<User> optUser = userRespository.findById(userId);
+		
+		if(optUser.isPresent()){
+			User existingUser = optUser.get();
+			if(user.getName() != null) {
+				existingUser.setName(user.getName());
+			}
+			if(user.getUsername() != null) {
+				existingUser.setUsername(user.getUsername());
+			}
+			if(user.getEmail() != null) {
+				existingUser.setEmail(user.getEmail());
+			}
+			if(user.getMobile() != null) {
+				existingUser.setMobile(user.getMobile());
+			}
+			return userRespository.save(existingUser);
+		}else {
+			throw new UserInvalidException("User details not found");
+		}
+		
+	}
+
+	@Override
+	public List<User> getAllUser() throws UserInvalidException {
+		// TODO Auto-generated method stub
+		List<User> user = userRespository.findAll();
+		if(user.isEmpty()) {
+			throw new UserInvalidException("No users found");
+		}
+		return user;
+	}
+
+	@Override
+	public User getUserById(String userId) throws UserInvalidException {
+		// TODO Auto-generated method stub
+		Optional<User> optUser = userRespository.findById(userId);
+		if(optUser.isPresent()) {
+			return optUser.get();
+		}
+		else {
+			throw new UserInvalidException("User not found");
+		}
+	}
+
+	@Override
+	public User getUserByUsername(String username) throws UserInvalidException {
+		// TODO Auto-generated method stub
+		Optional<User> optUser = Optional.ofNullable(userRespository.findByUsername(username));
+		if(optUser.isPresent()) {
+			return optUser.get();
+		}
+		else {
+			throw new UserInvalidException("User not found");
+		}
+	}
+
+	@Override
+	public User deleteUser(String userId) throws UserInvalidException {
+		// TODO Auto-generated method stub
+		Optional<User> optUser = userRespository.findById(userId);
+		if(optUser.isEmpty()) {
+			throw new UserInvalidException("User doesn't exist");
+		}
+		userRespository.deleteById(userId);
+		return optUser.get();
+		
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.sellzee.adminService.model;
+
+public class Admin {
+
+}

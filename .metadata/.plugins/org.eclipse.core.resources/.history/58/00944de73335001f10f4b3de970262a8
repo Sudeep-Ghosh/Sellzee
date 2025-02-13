@@ -1,0 +1,19 @@
+package com.sellzee.adminService.service;
+
+import java.util.List;
+
+import com.sellzee.adminService.model.Admin;
+import com.sellzee.adminService.model.User;
+
+
+public interface AdminService {
+	Admin addAdmin(Admin admin);
+	Admin updateAdmin(Admin admin, String adminId);
+	Admin getAdminByUserName(String userName);
+	Admin deleteAdmin(String userId);
+	//User updateUser(UserDTO user, String userId);
+	List<User> getAllUser();
+	User getUserById(String userId);
+	User getUserByUserName(String userName);
+	User deleteUser(String userId);
+}

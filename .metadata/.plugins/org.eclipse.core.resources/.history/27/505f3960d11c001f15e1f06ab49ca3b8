@@ -1,0 +1,9 @@
+package com.sellzee.adminService.service;
+
+import com.sellzee.adminService.model.Admin;
+
+public interface AdminService {
+	public Admin addAdmin(Admin admin);
+	public Admin updateAdmin(Admin admin, String adminId);
+	public Admin getAdminByUserName(String userName);
+}

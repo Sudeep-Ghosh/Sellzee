@@ -1,0 +1,23 @@
+package com.sellzee.vehicleService.model;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "Vehicles")
+public class Vehicle {
+	@MongoId
+	private String vehicleId;
+	private String vehicleName;
+	private String price;
+	private String address;
+	private VehicleDetails details;
+	private String sellerId;
+
+}

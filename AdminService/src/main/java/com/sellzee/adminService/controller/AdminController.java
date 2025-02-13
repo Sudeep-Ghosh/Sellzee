@@ -1,0 +1,70 @@
+package com.sellzee.adminService.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sellzee.adminService.exception.AdminException;
+import com.sellzee.adminService.model.Admin;
+import com.sellzee.adminService.model.User;
+import com.sellzee.adminService.service.AdminService;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/admin")
+public class AdminController {
+	
+	@Autowired
+	private AdminService service;
+	
+	@PostMapping("/addAdmin")
+	public ResponseEntity<Admin> addAdmin(@Valid @RequestBody Admin admin){
+		return new ResponseEntity<Admin>(service.addAdmin(admin),HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateAdmin/{userId}")
+	public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin,@PathVariable String adminId) throws AdminException{
+		return new ResponseEntity<Admin>(service.updateAdmin(admin, adminId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAdminByUsername/{username}")
+	public ResponseEntity<Admin> getAdminByUsername(@PathVariable String username) throws AdminException {
+		return new ResponseEntity<Admin>(service.getAdminByUsername(username),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteAdmin/{adminId}")
+	public ResponseEntity<Admin> deleteAdmin(@PathVariable String adminId) throws AdminException{
+		return new ResponseEntity<Admin>(service.deleteAdmin(adminId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAllUsers")
+	public ResponseEntity<List<User>> getAllUsers(){
+		return new ResponseEntity<List<User>>(service.getAllUser(),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getUserById/{userId}")
+	public ResponseEntity<User> getUserById(@PathVariable String userId){
+		return new ResponseEntity<User> (service.getUserById(userId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getUserByUsername/{username}")
+	public ResponseEntity<User> getUserByUserName(@PathVariable String username){
+		return new ResponseEntity<User>(service.getUserByUsername(username),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteUser/{userId}")
+	public ResponseEntity<User> deleteUser(@PathVariable String userId){
+		return new ResponseEntity<User>(service.deleteUser(userId),HttpStatus.OK);
+	}
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=UserService/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.sellzee.service{UserService.java[UserService" modifiers="513" timestamp="1715333015152"/>
+    <typeInfo handle="=UserService/C:\/Users\/sudeghos\/.p2\/pool\/plugins\/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.5.v20221102-0933\/jre\/lib\/jrt-fs.jar`java.base=/javadoc_location=/https:\/\/docs.oracle.com\/en\/java\/javase\/17\/docs\/api\/=/=/maven.pomderived=/true=/&lt;java.nio.file.attribute(UserPrincipal.class[UserPrincipal" modifiers="1537" timestamp="1667361988000"/>
+    <typeInfo handle="=UserService/C:\/Users\/sudeghos\/.m2\/repository\/org\/springframework\/data\/spring-data-mongodb\/4.2.4\/spring-data-mongodb-4.2.4.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-mongodb=/=/maven.version=/4.2.4=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.data.mongodb.repository(MongoRepository.class[MongoRepository" modifiers="1537" timestamp="1712816253965"/>
+    <typeInfo handle="=VehicleService/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.sellzee.vehicleService.service{VehicleService.java[VehicleService" modifiers="513" timestamp="1715334731114"/>
+</typeInfoHistroy>
